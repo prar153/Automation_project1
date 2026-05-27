@@ -12,6 +12,8 @@ class ProducthomePage():
         self.driver = driver
 
     def selectCategory(self, ctg, clothes):
+
+        # CLICK MAIN CATEGORY
         category = WebDriverWait(self.driver, 10).until(
             EC.element_to_be_clickable(
                 (By.XPATH, f"//a[normalize-space()='{ctg}']")

@@ -8,32 +8,12 @@ class Testproducthomepage:
 
     def testproducthomepage(self):
 
-        # CHROME OPTIONS
-        options = Options()
-
-        options.add_argument("--disable-notifications")
-        options.add_argument("--disable-popup-blocking")
-        options.add_argument("--disable-infobars")
-        options.add_argument("--disable-extensions")
-        options.add_argument("--incognito")
-
-        prefs = {
-            "profile.default_content_setting_values.notifications": 2
-        }
-
-        options.add_experimental_option("prefs", prefs)
-
         # OPEN BROWSER
-        self.driver = webdriver.Chrome(options=options)
+        self.driver = webdriver.Chrome()
 
         # OPEN WEBSITE
         self.driver.get("https://automationexercise.com/")
         self.driver.maximize_window()
-
-        self.driver.execute_script("""
-            let ads = document.querySelectorAll('iframe');
-            ads.forEach(ad => ad.remove());
-        """)
 
         self.LP = LoginPage(self.driver)
         self.PH = ProducthomePage(self.driver)
@@ -45,12 +25,6 @@ class Testproducthomepage:
         self.LP.setPassword("@Shrestha24")
 
         self.LP.clickSignupbtn()
-
-        # REMOVE ADS AGAIN AFTER LOGIN
-        self.driver.execute_script("""
-            let ads = document.querySelectorAll('iframe');
-            ads.forEach(ad => ad.remove());
-        """)
 
         # SELECT CATEGORY
         self.PH.selectCategory("Women", "Dress")
